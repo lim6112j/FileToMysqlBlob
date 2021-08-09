@@ -2,9 +2,13 @@
 module Main where
 
 import Lib
+import Mysql
+import Control.Monad (forM, join)
 main :: IO ()
 main = do
   putStrLn "type filepath you want"
   path <- getLine
   names <- getRecursiveContents path
-  putStrLn (unlines names)
+  fileContents <- mapM readFile names
+  putStrLn $ concatMap (\x -> "INSERT INTO DB (ID, IMAGE) VALUES(" ++ x ++ ")\n") fileContents
+  getDBInfo

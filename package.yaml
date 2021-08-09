@@ -23,6 +23,9 @@ dependencies:
 - base >= 4.7 && < 5
 - directory
 - filepath
+- mysql-haskell
+- io-streams
+- bytestring
 library:
   source-dirs: src
 
