@@ -1,7 +1,7 @@
 module Lib
     (getRecursiveContents
     ) where
-import Control.Monad (forM, join)
+import Control.Monad (forM)
 import System.Directory (doesDirectoryExist, getDirectoryContents, getCurrentDirectory)
 import System.FilePath ((</>))
 import Data.List.Utils (replace)
