@@ -1,5 +1,5 @@
 module Lib
-    (getRecursiveContents, someFunc
+    (getRecursiveContents
     ) where
 import Control.Monad (forM, join)
 import System.Directory (doesDirectoryExist, getDirectoryContents, getCurrentDirectory)
@@ -18,6 +18,3 @@ getRecursiveContents topDir = do
     then getRecursiveContents path
     else return [replace "./" curDir path]
   return (concat paths)
-
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
