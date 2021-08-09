@@ -8,6 +8,5 @@ main = do
   putStrLn "type filepath you want"
   path <- getLine
   names <- getRecursiveContents path
-  fileContents <- mapM readFile names
-  putStrLn $ concatMap (\x -> "INSERT INTO DB (ID, IMAGE) VALUES(" ++ x ++ ")\n") fileContents
+  putStrLn $ concatMap (\x -> "INSERT INTO DB (ID, IMAGE) VALUES(1, " ++ "LOAD_FILE('" ++  x ++ "'))\n") names
   getDBInfo
