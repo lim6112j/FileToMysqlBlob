@@ -12,7 +12,8 @@ getRecursiveContents topDir = do
   paths <- forM properNames $ \name -> do
     let path = topDir </> name
     isDirectory <- doesDirectoryExist path
-    curDir <- getCurrentDirectory
+    tmpDir <- getCurrentDirectory
+    let curDir = tmpDir ++ "/"
     if isDirectory
     then getRecursiveContents path
     else return [replace "./" curDir path]
