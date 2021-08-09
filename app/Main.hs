@@ -3,7 +3,6 @@ module Main where
 
 import Lib
 import Mysql
-import Control.Monad (forM, join)
 main :: IO ()
 main = do
   putStrLn "type filepath you want"
