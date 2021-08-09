@@ -26,6 +26,7 @@ dependencies:
 - mysql-haskell
 - io-streams
 - bytestring
+- MissingH
 library:
   source-dirs: src
 
