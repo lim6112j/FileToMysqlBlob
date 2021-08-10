@@ -27,6 +27,7 @@ dependencies:
 - io-streams
 - bytestring
 - MissingH
+- utf8-string
 library:
   source-dirs: src
 

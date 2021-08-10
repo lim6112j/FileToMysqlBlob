@@ -39,6 +39,7 @@ library
     , filepath
     , io-streams
     , mysql-haskell
+    , utf8-string
   default-language: Haskell2010
 
 executable f2d-exe
@@ -57,6 +58,7 @@ executable f2d-exe
     , filepath
     , io-streams
     , mysql-haskell
+    , utf8-string
   default-language: Haskell2010
 
 test-suite f2d-test
@@ -76,4 +78,5 @@ test-suite f2d-test
     , filepath
     , io-streams
     , mysql-haskell
+    , utf8-string
   default-language: Haskell2010
