@@ -7,11 +7,13 @@ import Mysql
 import Database.MySQL.Base as DMB
 import qualified Data.ByteString.Lazy.UTF8 as BLU hiding (ByteStribg,length, putStrLn, concatMap)
 import qualified Data.ByteString as B (ByteString,readFile, concat, putStr, concatMap)
-funC :: [FilePath] -> IO ([B.ByteString])
+funC :: [FilePath] -> IO ([Query])
 funC names= mapM f names
   where f x = do
           byteStr <- B.readFile x
-          return (B.concat ["INSERT INTO uploaded_images (imageData) VALUES('", byteStr, "')\n"])
+          let querystr = "INSERT INTO uploaded_images (imageData) VALUES('?')"
+              query = DMB.renderParams querystr $ DMB.render $ One (MySQLBytes byteStr)
+          return query
 main :: IO ()
 main = do
   putStrLn "type filepath you want"
@@ -20,8 +22,8 @@ main = do
   putStrLn $ "Items to be commited to Database : " ++ show (length names)
   putStrLn "Type any to continue or Stop with C-c"
   temp <- getLine
-  fileContents <- funC names
-  B.putStr $ B.concat (take 100 fileContents)
+  queries <- funC names
+  --B.putStr $ B.concat (take 100 queries)
   --let flatFileContents = B.concat fileContents
   --B.putStr $ B.concat fileContents
   --putStrLn $ foldl (++) "" fileContents
