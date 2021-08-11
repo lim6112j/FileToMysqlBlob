@@ -6,11 +6,11 @@ import qualified Data.ByteString as B
 import Data.Text.Internal
 import Control.Monad.Writer (Writer,writer, tell, runWriter)
 logPath :: IO ([(String, B.ByteString)]) -> Writer [String] (IO ([(String,B.ByteString)]))
-logPath x = writer (x, ["value of readPath"])
+logPath x = writer (x, [])
 readPath :: [(String, String)] -> Writer [String] (IO ([(String,B.ByteString)]))
 readPath params = do
   out <- logPath (mapM f params)
-  tell ["hello"]
+  tell [show params]
   return out
   where f (x,y) = do
           byteStr <- B.readFile (x ++ "/" ++ y)
