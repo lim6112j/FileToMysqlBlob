@@ -30,7 +30,8 @@ dependencies:
 - utf8-string
 - delay
 - text
-
+- hslogger
+- mtl
 library:
   source-dirs: src
 

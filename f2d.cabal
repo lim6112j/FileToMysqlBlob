@@ -38,7 +38,9 @@ library
     , delay
     , directory
     , filepath
+    , hslogger
     , io-streams
+    , mtl
     , mysql-haskell
     , text
     , utf8-string
@@ -59,7 +61,9 @@ executable f2d-exe
     , directory
     , f2d
     , filepath
+    , hslogger
     , io-streams
+    , mtl
     , mysql-haskell
     , text
     , utf8-string
@@ -81,7 +85,9 @@ test-suite f2d-test
     , directory
     , f2d
     , filepath
+    , hslogger
     , io-streams
+    , mtl
     , mysql-haskell
     , text
     , utf8-string
