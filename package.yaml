@@ -29,6 +29,8 @@ dependencies:
 - MissingH
 - utf8-string
 - delay
+- text
+
 library:
   source-dirs: src
 

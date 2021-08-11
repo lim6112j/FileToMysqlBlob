@@ -5,6 +5,7 @@ module Mysql(getDBInfo, insertData) where
 import Database.MySQL.Base
 import qualified System.IO.Streams as Streams
 import qualified Data.ByteString as B
+import qualified Data.Text as T
 queryLimit = 2
 executeMulti :: MySQLConn -> [[MySQLValue]] -> [[IO OK]]
 executeMulti conn params
@@ -12,7 +13,7 @@ executeMulti conn params
     | length params < queryLimit = [executeSmall params]
     | otherwise         = executeSmall (take queryLimit params):executeMulti conn (drop queryLimit params)
     where
-      executeSmall = map (execute conn "INSERT INTO uploaded_images(imagedata) VALUES(?)")
+      executeSmall = map (execute conn "INSERT INTO uploaded_images(imagepath, imagedata) VALUES(?, ?)")
 
 getDBInfo :: IO()
 getDBInfo = do
@@ -20,10 +21,11 @@ getDBInfo = do
     defaultConnectInfo {ciHost="133.186.212.161", ciPort=3306, ciUser = "root", ciPassword = "thecheat99))", ciDatabase = "thecheat_api"}
   (defs, is) <- query_ conn "SELECT * FROM uploaded_images limit 1"
   print =<< Streams.toList is
-insertData (paths::[B.ByteString]) = do
+insertData (paths::[(String,B.ByteString)]) = do
+
   conn <- connect
     defaultConnectInfo {ciHost="133.186.212.161", ciPort=3306, ciUser = "root", ciPassword = "thecheat99))", ciDatabase = "thecheat_api"}
-  let params = map (\x -> [MySQLBytes x]) paths
+  let params =map (\(x::String, y::B.ByteString) -> [MySQLText (T.pack x), MySQLBytes y]) paths
   print $ length params
   oks <- sequence $ concat $ executeMulti conn params
   --oks <- withTransaction conn $ executeMany conn "INSERT INTO uploaded_images(imageData) VALUES(?)" params

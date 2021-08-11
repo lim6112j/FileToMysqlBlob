@@ -1,17 +1,14 @@
-{-# OPTIONS_GHC -Wno-deferred-out-of-scope-variables #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# OPTIONS_GHC -XDataKinds#-}
 module Main where
-
 import Lib
 import Mysql
 import Database.MySQL.Base as DMB
 import qualified Data.ByteString as B
-readPath :: [FilePath] -> IO ([B.ByteString])
+import Data.Text.Internal
+readPath :: [(String, String)] -> IO ([(String,B.ByteString)])
 readPath = mapM f
-  where f x = do
-          byteStr <- B.readFile x
-          return byteStr
+  where f (x,y) = do
+          byteStr <- B.readFile (x ++ "/" ++ y)
+          return (x, byteStr)
 main :: IO ()
 main = do
   putStrLn "type filepath you want"
