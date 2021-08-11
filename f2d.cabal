@@ -35,6 +35,7 @@ library
       MissingH
     , base >=4.7 && <5
     , bytestring
+    , delay
     , directory
     , filepath
     , io-streams
@@ -53,6 +54,7 @@ executable f2d-exe
       MissingH
     , base >=4.7 && <5
     , bytestring
+    , delay
     , directory
     , f2d
     , filepath
@@ -73,6 +75,7 @@ test-suite f2d-test
       MissingH
     , base >=4.7 && <5
     , bytestring
+    , delay
     , directory
     , f2d
     , filepath
