@@ -8,9 +8,9 @@ import qualified Data.ByteString as B
 queryLimit = 2
 executeMulti :: MySQLConn -> [[MySQLValue]] -> [[IO OK]]
 executeMulti conn params
-    | params == [] = []
-    | (length params) < queryLimit = [executeSmall params]
-    | otherwise         = (executeSmall (take queryLimit params)):(executeMulti conn (drop queryLimit params))
+    | null params = []
+    | length params < queryLimit = [executeSmall params]
+    | otherwise         = executeSmall (take queryLimit params):executeMulti conn (drop queryLimit params)
     where
       executeSmall = map (execute conn "INSERT INTO uploaded_images(imagedata) VALUES(?)")
 
