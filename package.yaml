@@ -28,6 +28,7 @@ dependencies:
 - bytestring
 - MissingH
 - utf8-string
+- delay
 library:
   source-dirs: src
 
