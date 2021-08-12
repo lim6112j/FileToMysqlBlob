@@ -13,7 +13,7 @@ readPath params = do
   tell [show params]
   return out
   where f (x,y) = do
-          byteStr <- B.readFile (x ++ "/" ++ y)
+          byteStr <- B.readFile x
           return (x, byteStr)
 main :: IO ()
 main = do

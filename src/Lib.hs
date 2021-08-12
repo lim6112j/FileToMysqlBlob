@@ -16,5 +16,5 @@ getRecursiveDirectoryContents topDir = do
     let curDir = tmpDir ++ "/"
     if isDirectory
     then getRecursiveDirectoryContents path
-    else return [(replace "./" curDir topDir, name)]
+    else return [(path, name)]
   return (concat paths)

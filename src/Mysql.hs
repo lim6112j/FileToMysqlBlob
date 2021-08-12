@@ -6,7 +6,7 @@ import Database.MySQL.Base
 import qualified System.IO.Streams as Streams
 import qualified Data.ByteString as B
 import qualified Data.Text as T
-queryLimit = 2
+queryLimit = 1
 executeMulti :: MySQLConn -> [[MySQLValue]] -> [[IO OK]]
 executeMulti conn params
     | null params = []
