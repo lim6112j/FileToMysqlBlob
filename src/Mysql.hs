@@ -18,13 +18,15 @@ executeMulti conn params
 getDBInfo :: IO()
 getDBInfo = do
   conn <- connect
-    defaultConnectInfo {ciHost="133.186.212.161", ciPort=3306, ciUser = "root", ciPassword = "thecheat99))", ciDatabase = "thecheat_api"}
+    --defaultConnectInfo {ciHost="133.186.212.161", ciPort=3306, ciUser = "root", ciPassword = "thecheat99))", ciDatabase = "thecheat_api"}
+    defaultConnectInfo {ciHost="test.thecheat.office", ciPort=3306, ciUser = "api", ciPassword = "thecheat99))", ciDatabase = "thecheat_api"}
   (defs, is) <- query_ conn "SELECT * FROM uploaded_images limit 1"
   print =<< Streams.toList is
 insertData :: [(String, B.ByteString)] -> IO String
 insertData paths = do
   conn <- connect
-    defaultConnectInfo {ciHost="133.186.212.161", ciPort=3306, ciUser = "root", ciPassword = "thecheat99))", ciDatabase = "thecheat_api"}
+    --defaultConnectInfo {ciHost="133.186.212.161", ciPort=3306, ciUser = "root", ciPassword = "thecheat99))", ciDatabase = "thecheat_api"}
+    defaultConnectInfo {ciHost="test.thecheat.office", ciPort=3306, ciUser = "api", ciPassword = "thecheat99))", ciDatabase = "thecheat_api"}
   let params = map (\(x, y) -> [MySQLText (T.pack x), MySQLBytes y]) paths
   print $ length params
   oks <- sequence $ concat $ executeMulti conn params
